@@ -1,4 +1,5 @@
 ﻿using SolutionMongoTraining.Models;
+using SolutionMongoTraining.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,34 @@ namespace SolutionMongoTraining.Controllers
 {
     class TestigosController
     {
-        public async Task<bool> InitColection()
+        public bool InitColection()
         {
-            throw new NotImplementedException();
-        }
-        public async Task<TestigoModel> SearchColection(string source)
-        {
-            throw new NotImplementedException();
-        }
-        public async Task<bool> EditItemColection(string source)
-        {
-            throw new NotImplementedException();
-        }
-        public async Task<bool> DeleteItemColection(string source)
-        {
-            throw new NotImplementedException();
-        }
+            TestigosProvider pInjector = new TestigosProvider();
 
-
-        /************************/
-        public async Task<TestigoModel> SearchCPByCoord(string lat, string lon)
-        {
-            throw new NotImplementedException();
+            TestigoModel pBuffer;
+            for (int lCnt = 0; lCnt < 100; lCnt++)
+            {
+                pBuffer = new TestigoModel()
+                {
+                    lastUpdateTim = DateTime.Now,
+                    source = "src " + lCnt.ToString(),
+                    stack = Enumerable.Range(0, lCnt).ToList(),
+                    testigoId = lCnt
+                };
+                pInjector.Add(pBuffer);
+            }
+            return true;
         }
-
+        public List<TestigoModel> List()
+        {
+            TestigosProvider pInjector = new TestigosProvider();
+            return pInjector.List();
+        }
     }
+    ///************************/
+    //public async Task<TestigoModel> SearchCPByCoord(string lat, string lon)
+    //{
+    //    throw new NotImplementedException();
+    //}
+
 }

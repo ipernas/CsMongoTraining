@@ -10,15 +10,17 @@ namespace SolutionMongoTraining.Models
     {
         public TestigoModel()
         {
-            stack = new List<string>();
+            stack = new List<int>();
         }
 
         public MongoDB.Bson.BsonObjectId id { get; set; }
+
+        public int testigoId { get; set; }
 
         public string source { get; set; }
 
         public DateTime? lastUpdateTim { get; set; }
 
-        public List<string> stack { get; set; }
+        public List<int> stack { get; set; }
     }
 }

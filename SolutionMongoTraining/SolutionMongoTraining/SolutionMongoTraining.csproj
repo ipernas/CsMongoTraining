@@ -63,6 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\MapasCPMadrid\CODIGO_POSTAL_EPSG4326.cpg" />
+    <None Include="Data\MapasCPMadrid\CODIGO_POSTAL_EPSG4326.dbf" />
+    <None Include="Data\MapasCPMadrid\CODIGO_POSTAL_EPSG4326.prj" />
+    <None Include="Data\MapasCPMadrid\CODIGO_POSTAL_EPSG4326.qpj" />
+    <None Include="Data\MapasCPMadrid\CODIGO_POSTAL_EPSG4326.shp" />
+    <None Include="Data\MapasCPMadrid\CODIGO_POSTAL_EPSG4326.shx" />
+    <None Include="Data\MapasCPMadrid\cp_madrid.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

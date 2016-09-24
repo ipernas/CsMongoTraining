@@ -28,6 +28,7 @@ namespace SolutionMongoTraining.Controllers
             }
             return true;
         }
+
         public List<TestigoModel> List()
         {
             TestigosProvider pInjector = new TestigosProvider();

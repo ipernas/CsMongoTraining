@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Controllers\TestigosController.cs" />
     <Compile Include="Models\TestigoModel.cs" />
+    <Compile Include="Models\ZipModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\TestigosProvider.cs" />

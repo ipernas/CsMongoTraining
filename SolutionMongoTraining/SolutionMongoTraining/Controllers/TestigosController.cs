@@ -10,10 +10,15 @@ namespace SolutionMongoTraining.Controllers
 {
     class TestigosController
     {
+        private TestigosProvider pInjector;
+
+        public TestigosController()
+        {
+            pInjector = new TestigosProvider();
+        }
+
         public bool InitColection()
         {
-            TestigosProvider pInjector = new TestigosProvider();
-
             TestigoModel pBuffer;
             for (int lCnt = 0; lCnt < 100; lCnt++)
             {
@@ -31,8 +36,20 @@ namespace SolutionMongoTraining.Controllers
 
         public List<TestigoModel> List()
         {
-            TestigosProvider pInjector = new TestigosProvider();
             return pInjector.List();
+        }
+
+        public bool DeleteLast()
+        {
+            return pInjector
+                .Delete(pInjector
+                    .List()
+                    .Last()
+                        .testigoId); 
+        }
+        public string findZipFromLatLon()
+        {
+            return pInjector.findZipFromLatLon(-3.8886827, 40.4896445);
         }
     }
     ///************************/

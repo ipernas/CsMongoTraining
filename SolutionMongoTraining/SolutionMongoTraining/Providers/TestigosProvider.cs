@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using MongoDB.Driver.GeoJsonObjectModel;
 using SolutionMongoTraining.Models;
 using System;
 using System.Collections.Generic;
@@ -48,13 +49,36 @@ namespace SolutionMongoTraining.Providers
                                 .Select(x => x).ToList();
             return lstRet;
         }
-        public async Task<TestigoModel> Update(string source)
+        public bool Delete(int testigoId)
         {
-            throw new NotImplementedException();
+            var delres = dbMongoCollection.DeleteOne(x => x.testigoId == testigoId);
+            return delres.IsAcknowledged;
         }
-        public async Task<TestigoModel> Delete(string source)
+
+        /* *********************************************** */
+        public string findZipFromLatLon(double Lon /*-3*/, double Lat /*40*/)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var dbMongoClientGeo = new MongoClient(/* Aquí va la cadena de conexión*/);
+                var dbMongoDbGeo = dbMongoClientGeo.GetDatabase("GEO");
+                var dbMongoCollectionGeo = dbMongoDbGeo.GetCollection<GeoZipModel>("GeoZipMadrid");
+
+                /* Se pasa el punto de longitud y latitud a un objeto punto */
+                var point = GeoJson.Point(GeoJson.Geographic(Lon, Lat));
+
+                /* Se crea una query (linq no vale para geo en mongo) y se buscan los polígonos que intersecan con el punto */
+                var qBuilderZip = Builders<GeoZipModel>.Filter.GeoIntersects("geometry", point);
+                var pZip = dbMongoCollectionGeo.Find(qBuilderZip).FirstOrDefault();
+                if (pZip != null)
+                    return pZip.zipCode;
+                else
+                    return "???";
+            }
+            catch (Exception err)
+            {
+                return null;
+            }
         }
     }
 }
